@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="header__title">What should I read next?</h1>
+        <h2 class="header__subtitle">
+          powered by <span>OpenLibrary API</span>
+        </h2>
+      </header>
+      <main>
+        <div class="form">
+          <form class="search">
+            <select name="" id="">
+              <option value="genre">Genre</option>
+              <option value="author">Author</option>
+              <option value="title">Title</option>
+            </select>
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="What's on your mind?"
+            />
+            <button class="btn search__btn" alt="Search">
+              <svg>
+                <use xlink:href="./img/sprite.svg#search"></use>
+              </svg>
+            </button>
+            <button class="btn filter__btn" alt="Filter">
+              <svg>
+                <use xlink:href="./img/sprite.svg#filter"></use>
+              </svg>
+            </button>
+          </form>
+        </div>
+        <div class="search-results">
+          <ul class="results">
+            <li class="preview">
+              <div class="btn preview__btn">
+                <svg>
+                  <use xlink:href="./img/sprite.svg#x"></use>
+                </svg>
+              </div>
+              <div class="preview__main">
+                <h3 class="preview__title">The Lord of the rings</h3>
+                <h4 class="preview__subtitle">J.R.R. Tolkien</h4>
+              </div>
+              <div class="preview__content">
+                <div class="preview__description">
+                  <p class="preview__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Odit vitae blanditiis quos voluptatem, commodi eius!
+                  </p>
+                  <a href="#" class="preview__link">Read more &#707;</a>
+                </div>
+                <figure class="preview__fig">
+                  <img src="../src/img/cover-example.jpg" alt="example cover" />
+                </figure>
+              </div>
+            </li>
+            <li class="preview">
+              <div class="btn preview__btn">
+                <svg>
+                  <use xlink:href="./img/sprite.svg#x"></use>
+                </svg>
+              </div>
+              <div class="preview__main">
+                <h3 class="preview__title">The Lord of the rings</h3>
+                <h4 class="preview__subtitle">J.R.R. Tolkien</h4>
+              </div>
+              <div class="preview__content">
+                <div class="preview__description">
+                  <p class="preview__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Odit vitae blanditiis quos voluptatem, commodi eius!
+                  </p>
+                  <a href="#" class="preview__link">Read more &#707;</a>
+                </div>
+                <figure class="preview__fig">
+                  <img src="../src/img/cover-example.jpg" alt="example cover" />
+                </figure>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="pagination">
+          <button class="btn btn--"></button>
+          <div class="pagination__page">1/6</div>
+          <button class="btn btn--"></button>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

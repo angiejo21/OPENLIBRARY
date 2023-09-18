@@ -1,0 +1,30 @@
+.form {
+  width: 100%;
+  margin-bottom: 10rem;
+
+  .search {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+  }
+  input,
+  select {
+    height: 8rem;
+    padding: 0 6rem 0 4rem;
+    border: none;
+    border-radius: 100px;
+    color: $color-dark-2;
+    background-color: $color-light-2;
+    font-size: 2.4rem;
+    font-family: inherit;
+  }
+}
+::selection {
+  background-color: $color-accent;
+}
