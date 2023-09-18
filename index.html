@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    link
+    <title>WSIRN | What should I read next?</title>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="header__title">What should I read next?</h1>
+        <h2 class="header__subtitle">powered by OpenLibrary API</h2>
+      </header>
+      <main>
+        <div>
+          <form class="search">
+            <select name="" id="">
+              <option value="genre">Genre</option>
+              <option value="author">Author</option>
+              <option value="title">Title</option>
+            </select>
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="What's on your mind?"
+            />
+            <button class="btn search__btn">Search</button>
+            <button class="btn search__btn">Filter</button>
+          </form>
+        </div>
+        <div class="search-results">
+          <ul class="results">
+            <li class="preview">
+              <div class="btn preview__btn"></div>
+              <div class="preview__main">
+                <h3 class="preview__title">The Lord of the rings</h3>
+                <h4 class="preview__subtitle">J.R.R. Tolkien</h4>
+              </div>
+              <div class="preview__content">
+                <div class="preview__description">
+                  <p class="preview__text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Odit vitae blanditiis quos voluptatem, commodi eius!
+                  </p>
+                  <a href="#" class="preview__link">Read more &#707;</a>
+                </div>
+                <figure class="preview__fig">
+                  <img src="./src/img/cover-example.jpg" alt="example cover" />
+                </figure>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="pagination"></div>
+      </main>
+    </div>
+  </body>
+</html>

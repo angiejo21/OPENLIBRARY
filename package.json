@@ -1,0 +1,14 @@
+{
+  "name": "4-project-openlibrary",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tailwindcss -i ./src/css/input.css -o ./dist/css/style.css --minify",
+    "watch": "npx tailwindcss -i ./src/css/input.css -o ./dist/css/style.css --watch --minify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {}
+}
