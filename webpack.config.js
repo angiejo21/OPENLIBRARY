@@ -1,7 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin =
-  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+// const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
+// const BundleAnalyzerPlugin =
+//   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
   mode: "development",
@@ -42,8 +43,20 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|jpg|jpeg|gif)$/i,
         type: "asset/resource",
+      },
+      {
+        test: /\.svg$/i,
+        // include: /.*_sprite\.svg/,
+        use: [
+          {
+            loader: "svg-sprite-loader",
+            // options: {
+            //   publicPath: "",
+            // },
+          },
+        ],
       },
     ],
   },
@@ -53,6 +66,7 @@ module.exports = {
       filename: "index.html",
       template: "src/template.html",
     }),
+    // new SpriteLoaderPlugin(),
     // new BundleAnalyzerPlugin(),
   ],
 };

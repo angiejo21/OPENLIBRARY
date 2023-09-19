@@ -3,7 +3,14 @@ import view from "./view.js";
 
 import "../scss/main.scss";
 import cover from "../img/cover-example.jpg";
-import sprite from "../img/sprite.svg";
+import "../img/bookmark.svg";
+import "../img/chevron-down.svg";
+import "../img/chevron-left.svg";
+import "../img/chevron-right.svg";
+import "../img/code.svg";
+import "../img/filter.svg";
+import "../img/search.svg";
+import "../img/x.svg";
 
 /*-----------------------------------
             CONTROLLER    

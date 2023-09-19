@@ -1,6 +1,7 @@
 .form {
   width: 100%;
   margin-bottom: 10rem;
+  color: $color-dark-2;
 
   .search {
     display: flex;
@@ -11,6 +12,18 @@
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
+      cursor: pointer;
+    }
+    .select {
+      position: relative;
+      svg {
+        fill: currentColor;
+        height: 5rem;
+        position: absolute;
+        top: 50%;
+        right: 1.5rem;
+        transform: translateY(-50%);
+      }
     }
   }
   input,
@@ -19,7 +32,7 @@
     padding: 0 6rem 0 4rem;
     border: none;
     border-radius: 100px;
-    color: $color-dark-2;
+
     background-color: $color-light-2;
     font-size: 2.4rem;
     font-family: inherit;
@@ -27,4 +40,12 @@
 }
 ::selection {
   background-color: $color-accent;
+}
+select:focus,
+input:focus {
+  outline: none;
+  border: 3px solid rgba($color-accent, 0.5);
+}
+.btn--filter {
+  transform: rotate(90deg);
 }
