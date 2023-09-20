@@ -16,9 +16,22 @@ export const state = {
   bookmarks: [],
 };
 
-export const loadSearchResults = async function () {
+export const loadSearchResults = async function (query) {
   //0) salva la query
+  state.search.query = query;
   //1) aspetta la risposta della chiamata all'API
+  const data = await axios.get(`${API_URL}subjects/${query}.json`);
+  console.log(data.data);
+  state.search.results = data.data.works.map((work) => {
+    return {
+      id: work.key.slice(work.key.indexOf("OL")),
+      title: work.title,
+      author: work.authors[0].name,
+      cover: work.cover_id,
+    };
+  });
+  console.log(state.search.results);
+
   //2) Salva i dati arrivati tra i risultati creando l'oggetto libro che serve
   //3) Imposta la pagina iniziale a 1
 };

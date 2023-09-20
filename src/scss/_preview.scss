@@ -60,6 +60,9 @@
     box-shadow: inset 3px 0 0 $color-accent;
     padding: 0 1rem;
     transition: 0.3s;
+    span {
+      transition: 0.3s;
+    }
   }
   &__link:hover,
   &__link:active {

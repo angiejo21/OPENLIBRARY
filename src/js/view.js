@@ -1,18 +1,25 @@
 /*-----------------------------------
               VIEW     
 -----------------------------------*/
-class View {
+export default class View {
   _data;
-  _parentElement = "";
-  _errorMessage = "";
-  _message = "";
-
-  render() {}
+  render(data, render = true) {
+    if (!data || (Array.isArray(data) && data.length === 0)) {
+      return this.renderError();
+    }
+    this._data = data;
+    const markup = this._generateMarkup();
+    if (!render) return markup;
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
   renderSpinner() {}
-  renderError() {}
+  renderError(message = this._errorMessage) {
+    console.error(message);
+  }
   renderMessage() {}
-  _generateMarkup() {}
-  _clear() {}
-}
 
-export default new View();
+  _clear() {
+    this._parentElement.innerHTML = "";
+  }
+}
