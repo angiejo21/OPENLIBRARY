@@ -1,6 +1,7 @@
 import * as model from "./model.js";
 import searchView from "./searchView.js";
 import resultsView from "./resultsView.js";
+import paginationView from "./paginationView.js";
 
 import "../scss/main.scss";
 import cover from "../img/cover-example.jpg";
@@ -21,21 +22,18 @@ const coverImg = document.querySelector("img");
 
 coverImg.src = cover;
 
-console.log("gotcha");
-
 const controlBookLoading = async function () {
   try {
     const { field, query } = searchView.getQuery();
     console.log(field, query);
     if (!query) return;
     await model.loadSearchResults(field, query);
-    resultsView.render(model.state.search.results);
-    resultsView.addHandlerBook(controlBookSelection);
+    resultsView.render(model.getPageResults());
+    paginationView.render(model.state.search);
   } catch (err) {}
 };
 const controlBookSelection = async function (e) {
   try {
-    console.log(e.target);
     if (e.target.classList.contains("preview__btn")) {
       const bookEl = e.target.closest(".preview");
       if (!bookEl.classList.contains("preview--active")) {
@@ -50,8 +48,15 @@ const controlBookSelection = async function (e) {
   } catch (err) {}
 };
 
+const controlPagination = function (moveTo) {
+  resultsView.render(model.getPageResults(moveTo));
+  paginationView.render(model.state.search);
+};
+
 const init = function () {
   searchView.addHandlerSearch(controlBookLoading);
+  resultsView.addHandlerBook(controlBookSelection);
+  paginationView.addHandlerPagination(controlPagination);
 };
 
 init();

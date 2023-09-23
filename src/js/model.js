@@ -33,7 +33,6 @@ export const loadSearchResults = async function (field, query) {
     //1) aspetta la risposta della chiamata all'API
     const data = await axios.get(`${BASIC_URL}${apiUrl}`);
     let results;
-    console.log(data.data);
     if (data.data.works) {
       results = data.data.works.map((w) => {
         return {
@@ -52,23 +51,16 @@ export const loadSearchResults = async function (field, query) {
             author: d.author_name[0],
             coverId: d.cover_i,
           };
-        } else if (!d.author_name && d.contributor) {
-          return {
-            id: d.key.slice(d.key.indexOf("OL")),
-            title: d.title,
-            author: d.contributor[0],
-            coverId: "",
-          };
         } else {
           return;
         }
       });
     }
     state.search.results = results.filter((r) => r);
-    console.log(state.search.results);
 
     //2) Salva i dati arrivati tra i risultati creando l'oggetto libro che serve
     //3) Imposta la pagina iniziale a 1
+    state.search.page = 1;
   } catch (err) {
     console.error(err, "loading failed");
   }
@@ -94,19 +86,27 @@ export const loadBook = async function (id) {
     state.book = state.search.results.filter((b) => b.id === id)[0];
     //1)aspetta la risposta alla chiamata all'API
     const data = await axios.get(`${BASIC_URL}works/${id}.json`);
-    console.log(data);
     //2)salva i dati arrivati nell'oggetto libro
     state.book.cover = state.book.coverId
       ? `${COVER_URL}id/${state.book.coverId}-M.jpg`
       : `${COVER_URL}olid/${state.book.id}-M.jpg`;
     state.book.url = `${BASIC_URL}works/${state.book.id}`;
     updateBookDescription(data);
-    console.log(state.book);
     //2)se il libro è salvato lo contrassegna
   } catch (err) {
     console.error(err, "book failed");
   }
 };
+
+export const getPageResults = function (moveTo = state.search.page) {
+  if (moveTo === "previous") state.search.page--;
+  if (moveTo === "next") state.search.page++;
+  const page = state.search.page;
+  const start = (page - 1) * RES_PER_PAGE;
+  const end = page * RES_PER_PAGE;
+  return state.search.results.slice(start, end);
+};
+
 export const saveBookmark = function () {};
 export const addBookmark = function () {};
 export const deleteBookmark = function () {};
