@@ -1,10 +1,13 @@
+import { createQuery } from "./helpers.js";
+
 class SearchView {
   _parentElement = document.querySelector(".search");
 
   getQuery() {
-    const query = document.querySelector(".search--query").value;
+    const field = document.querySelector(".search--field").value;
+    const query = createQuery(document.querySelector(".search--query").value);
     this._clearInput();
-    return query;
+    return { field, query };
   }
   _clearInput() {
     this._parentElement.querySelector(".search--query").value = "";

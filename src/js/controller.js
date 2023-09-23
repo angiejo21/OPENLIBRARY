@@ -24,19 +24,30 @@ coverImg.src = cover;
 console.log("gotcha");
 
 const controlBookLoading = async function () {
-  const query = searchView.getQuery();
-  if (!query) return;
-  await model.loadSearchResults(query);
-  resultsView.render(model.state.search.results);
-  //TODO:
-  resultsView.addHandlerBook(controlBookSelection);
+  try {
+    const { field, query } = searchView.getQuery();
+    console.log(field, query);
+    if (!query) return;
+    await model.loadSearchResults(field, query);
+    resultsView.render(model.state.search.results);
+    resultsView.addHandlerBook(controlBookSelection);
+  } catch (err) {}
 };
 const controlBookSelection = async function (e) {
-  console.log(e.target);
-  if (e.target.classList.contains("preview__btn")) {
-    console.log("open", e.target.closest(".preview"));
-    e.target.closest(".preview").classList.toggle("preview--active");
-  }
+  try {
+    console.log(e.target);
+    if (e.target.classList.contains("preview__btn")) {
+      const bookEl = e.target.closest(".preview");
+      if (!bookEl.classList.contains("preview--active")) {
+        await model.loadBook(bookEl.dataset.id);
+        resultsView.updateMarkup(bookEl, model.state.book);
+      }
+      bookEl.classList.toggle("preview--active");
+    }
+    if (e.target.classList.contains("preview__link")) {
+      window.open(e.target.href, "_blank").focus();
+    }
+  } catch (err) {}
 };
 
 const init = function () {

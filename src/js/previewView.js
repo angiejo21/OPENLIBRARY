@@ -17,7 +17,11 @@ class PreviewView extends View {
         </svg>
       </div>
       <div class="preview__main">
-        <h3 class="preview__title">${this._data.title}</h3>
+        <h3 class="preview__title">${
+          this._data.title.length > 40
+            ? this._data.title.slice(0, 40) + "..."
+            : this._data.title
+        }</h3>
         <h4 class="preview__subtitle">${this._data.author}</h4>
       </div>
       <div class="preview__content">

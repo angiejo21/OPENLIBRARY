@@ -39,7 +39,7 @@
   }
 }
 ::selection {
-  background-color: $color-accent;
+  background-color: rgba($color-dark-1, 0.5);
 }
 select:focus,
 input:focus {

@@ -1,28 +1,29 @@
 .preview {
-  width: 512px;
+  width: 100%;
   margin-bottom: 2rem;
-  // background-color: $color-light-2;
-  border-radius: 40px;
-  overflow: hidden;
+  padding: 0 2rem;
+  background-color: rgba($color-accent, 0);
+  position: relative;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 8rem max-content;
-  transition: all 0.5s;
-
-  position: relative;
+  transition: 1s;
 
   &__btn {
     grid-row: 1 / 2;
     grid-column: 1 / 2;
-    // position: absolute;
-    // top: 0;
-    // left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 5;
+    transform: translateX(0);
+    transition: 1.5s;
     svg {
-      transform: rotate(45deg);
-      transition: 0.5s;
+      transform: rotate(-45deg);
+      transition: 1.5s;
     }
   }
+
   &__main {
     background-color: $color-accent;
     grid-column: 1 / -1;
@@ -32,7 +33,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
+    border-radius: 40px;
   }
+
   &__title {
     font-size: 2.2rem;
   }
@@ -43,6 +46,8 @@
   }
   &__content {
     display: none;
+    grid-column: 1 / -1;
+    grid-row: 2 /3;
   }
   &__description {
     grid-column: 1 / 4;
@@ -77,7 +82,7 @@
     grid-row: 1 / 2;
     padding: 1rem;
     position: relative;
-    // height: 200px;
+    max-height: 42rem;
 
     &::before {
       content: "";
@@ -105,9 +110,6 @@
     }
   }
   .btn--bookmark {
-    // position: absolute;
-    // top: 0;
-    // left: 0;
     grid-row: 1 / 2;
     grid-column: 1 / 2;
     z-index: 3;
@@ -115,33 +117,30 @@
     color: $color-dark-1;
   }
 }
+
+//ACTIVE STATE
+
 .preview--active {
   background-color: rgba($color-accent, 0.2);
   padding: 2rem;
   border-radius: 5px;
   gap: 1rem;
+
   .preview__btn {
-    grid-column: -2 / -1;
-    justify-self: end;
+    left: 500%;
+    transition: 1.5s;
+    transform: translateX(-50%);
     svg {
-      transform: rotate(0deg);
+      transform: rotate(360deg);
     }
   }
-  .preview__main {
-    grid-column: 1 / -1;
-    padding: 0 10rem;
-    border-radius: 50px;
-  }
+
   .preview__content {
     display: grid;
-    grid-column: 1 / -1;
-    grid-row: 2 /3;
     grid-template-columns: repeat(5, 1fr);
+    transform: scale(1);
   }
   .preview__fig {
     display: block;
-  }
-  .preview__description {
-    margin: 1rem;
   }
 }
