@@ -7,6 +7,9 @@
   </head>
   <body>
     <div class="container">
+      <div class="overlay">
+        <div class="overlay__content"></div>
+      </div>
       <header class="header">
         <h1 class="header__title">What should I read next?</h1>
         <h2 class="header__subtitle">
@@ -16,8 +19,12 @@
       <main>
         <div class="form">
           <form class="search">
-            <div class="select">
-              <select name="field" id="field" class="search--field">
+            <div class="select search__select">
+              <select
+                name="field"
+                id="field"
+                class="search--field search__field"
+              >
                 <option value="subjects">Genre</option>
                 <option value="author">Author</option>
                 <option value="title">Title</option>
@@ -31,16 +38,16 @@
               name="query"
               id="query"
               placeholder="What's on your mind?"
-              class="search--query"
+              class="search--query search__query"
             />
             <button class="btn btn--search" title="Search">
               <svg>
                 <use xlink:href="#search"></use>
               </svg>
             </button>
-            <button class="btn btn--filter" title="Filter">
+            <button class="btn btn--all-bookmarks" title="See all bookmarks">
               <svg>
-                <use xlink:href="#code"></use>
+                <use xlink:href="#bookmark"></use>
               </svg>
             </button>
           </form>
@@ -53,7 +60,10 @@
                   <use xlink:href="#bookmark"></use>
                 </svg>
               </button>
-              <button class="btn preview__btn" title="Open / Close book">
+              <button
+                class="btn btn--toggle preview__btn"
+                title="Toggle book dscription"
+              >
                 <svg>
                   <use xlink:href="#x"></use>
                 </svg>

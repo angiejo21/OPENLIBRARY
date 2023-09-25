@@ -19,6 +19,15 @@ class SearchView {
       handler();
     });
   }
+  addHandlerBookmarks(handler) {
+    this._parentElement.addEventListener("click", (e) => {
+      const btn = e.target.closest(".btn");
+      if (!btn) return;
+      if (btn.classList.contains("btn--all-bookmarks")) {
+        handler();
+      } else return;
+    });
+  }
 }
 
 export default new SearchView();

@@ -1,5 +1,5 @@
 import axios from "axios";
-import _ from "lodash/core.js";
+import _ from "lodash-es";
 import { createQuery } from "./helpers.js";
 import {
   BASIC_URL,
@@ -34,6 +34,7 @@ export const loadSearchResults = async function (field, query) {
     //1) aspetta la risposta della chiamata all'API
     const data = await axios.get(`${BASIC_URL}${apiUrl}`);
     let results;
+    //2) Salva i dati arrivati tra i risultati creando l'oggetto libro che serve
     if (data.data.works) {
       results = data.data.works.map((w) => {
         return {
@@ -57,9 +58,17 @@ export const loadSearchResults = async function (field, query) {
         }
       });
     }
-    state.search.results = results.filter((r) => r);
-
-    //2) Salva i dati arrivati tra i risultati creando l'oggetto libro che serve
+    state.search.results = results
+      .filter((r) => r)
+      .map((r) => {
+        if (state.bookmarks.some((bm) => bm.id === r.id)) {
+          r.bookmarked = true;
+          return r;
+        } else {
+          r.bookmarked = false;
+          return r;
+        }
+      });
     //3) Imposta la pagina iniziale a 1
     state.search.page = 1;
   } catch (err) {
@@ -85,6 +94,7 @@ export const loadBook = async function (id) {
   try {
     //0)Recupera il libro dalla ricerca
     state.book = state.search.results.filter((b) => b.id === id)[0];
+
     //1)aspetta la risposta alla chiamata all'API
     const data = await axios.get(`${BASIC_URL}works/${id}.json`);
     //2)salva i dati arrivati nell'oggetto libro
@@ -93,7 +103,6 @@ export const loadBook = async function (id) {
       : `${COVER_URL}olid/${state.book.id}-M.jpg`;
     state.book.url = `${BASIC_URL}works/${state.book.id}`;
     updateBookDescription(data);
-    //2)se il libro è salvato lo contrassegna
   } catch (err) {
     console.error(err, "book failed");
   }
@@ -119,5 +128,14 @@ export const addBookmark = function (book) {
 export const deleteBookmark = function (book) {
   const index = state.bookmarks.findIndex((b) => b.id === book.id);
   state.bookmarks.splice(index, 1);
+  book.bookmarked = false;
   saveBookmark();
+};
+export const showBookmarks = function () {
+  state.search.results = _.cloneDeep(state.bookmarks);
+  console.log(state.search.results);
+};
+export const initStorage = function () {
+  const storage = localStorage.getItem("bookmarks");
+  if (storage) state.bookmarks = JSON.parse(storage);
 };

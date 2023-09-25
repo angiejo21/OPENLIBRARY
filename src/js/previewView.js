@@ -11,7 +11,7 @@ class PreviewView extends View {
           <use xlink:href="#bookmark"></use>
         </svg>
       </div>
-      <div class="btn preview__btn" title="Open / Close book">
+      <div class="btn btn--toggle preview__btn" title="toggle book">
         <svg>
           <use xlink:href="#x"></use>
         </svg>
@@ -26,16 +26,19 @@ class PreviewView extends View {
       </div>
       <div class="preview__content">
         <div class="preview__description">
-          <p class="preview__text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Odit vitae blanditiis quos voluptatem, commodi eius!
-          </p>
-          <a href="#" class="preview__link"
+          <p class="preview__text">${
+            this._data.description ? this._data.description : " "
+          }</p>
+          <a href="${
+            this._data.url ? this._data.url : "#"
+          }" class="preview__link"
             >Read more <span>&#707;</span></a
           >
         </div>
         <figure class="preview__fig">
-          <img src="../src/img/cover-example.jpg" alt="example cover" />
+          <img src="${this._data.cover ? this._data.cover : "#"}" alt="${
+      this._data.title
+    } cover" />
         </figure>
       </div>
     </li>
