@@ -1,4 +1,5 @@
 import axios from "axios";
+import _ from "lodash/core.js";
 import { createQuery } from "./helpers.js";
 import {
   BASIC_URL,
@@ -107,6 +108,16 @@ export const getPageResults = function (moveTo = state.search.page) {
   return state.search.results.slice(start, end);
 };
 
-export const saveBookmark = function () {};
-export const addBookmark = function () {};
-export const deleteBookmark = function () {};
+const saveBookmark = function () {
+  localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
+};
+export const addBookmark = function (book) {
+  book.bookmarked = true;
+  state.bookmarks.push(book);
+  saveBookmark();
+};
+export const deleteBookmark = function (book) {
+  const index = state.bookmarks.findIndex((b) => b.id === book.id);
+  state.bookmarks.splice(index, 1);
+  saveBookmark();
+};

@@ -34,15 +34,23 @@ const controlBookLoading = async function () {
 };
 const controlBookSelection = async function (e) {
   try {
-    if (e.target.classList.contains("preview__btn")) {
-      const bookEl = e.target.closest(".preview");
+    const bookEl = e.target.closest(".preview");
+    const btn = e.target.closest(".btn");
+    const id = bookEl.dataset.id;
+    console.log(e.target);
+    if (btn.classList.contains("preview__btn")) {
       if (!bookEl.classList.contains("preview--active")) {
         await model.loadBook(bookEl.dataset.id);
         resultsView.updateMarkup(bookEl, model.state.book);
       }
       bookEl.classList.toggle("preview--active");
     }
+    if (btn.classList.contains("btn--bookmark")) {
+      if (model.state.book.bookmarked) model.deleteBookmark(model.state.book);
+      if (!model.state.book.bookmarked) model.addBookmark(model.state.book);
+    }
     if (e.target.classList.contains("preview__link")) {
+      console.log("link");
       window.open(e.target.href, "_blank").focus();
     }
   } catch (err) {}
