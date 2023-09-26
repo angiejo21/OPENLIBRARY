@@ -3,8 +3,10 @@ import previewView from "./previewView.js";
 
 class ResultsView extends View {
   _parentElement = document.querySelector(".results");
-  _errorMessage = "";
-  _message = "";
+  _errorMessage =
+    "We couldn't find any book corresponding to your query.<br> Please try again :)";
+  _message =
+    "You haven't bookmarked any book yet, as soon as you do, you'll find them all here :)";
 
   _generateMarkup() {
     return this._data
@@ -33,17 +35,27 @@ class ResultsView extends View {
       e.preventDefault();
       const bookEl = e.target.closest(".preview");
       const btn = e.target.closest(".btn");
+
       if (e.target.classList.contains("preview__link")) {
         handler("link", e.target.href);
       }
+
       if (btn.classList.contains("btn--toggle")) {
         if (!bookEl.classList.contains("preview--active")) {
           handler("toggle", bookEl.dataset.id);
         } else bookEl.classList.toggle("preview--active");
       }
+
       if (btn.classList.contains("btn--bookmark")) {
         handler("bookmark");
         btn.classList.toggle("bookmark-active");
+        btn.innerHTML = `
+        <svg>
+          <use xlink:href="#${
+            btn.classList.contains("bookmark-active") ? "book" : "bookmark"
+          }"></use>
+        </svg>
+        `;
       }
     });
   }

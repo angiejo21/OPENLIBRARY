@@ -9,9 +9,9 @@ class PreviewView extends View {
       <div class="btn btn--bookmark ${
         this._data.bookmarked ? "bookmark-active" : ""
       }" title="Bookmark it">
-        <svg>
-          <use xlink:href="#bookmark"></use>
-        </svg>
+      <svg>
+        <use xlink:href="#${this._data.bookmarked ? "book" : "bookmark"}"></use>
+      </svg>
       </div>
       <div class="btn btn--toggle preview__btn" title="toggle book">
         <svg>

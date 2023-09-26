@@ -13,11 +13,45 @@ export default class View {
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
-  renderSpinner() {}
-  renderError(message = this._errorMessage) {
-    console.error(message);
+  renderSpinner() {
+    const markup = `
+    <div class="spinner">
+      <svg>
+        <use xlink:href="#compass"></use>
+      </svg>
+    </div>
+    `;
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
-  renderMessage() {}
+  renderError(message = this._errorMessage) {
+    const markup = `
+    <div class="message">
+      <div>
+        <svg>
+          <use xlink:href="#alert-triangle"></use>
+        </svg>
+      </div>
+      <p>${message}</p>
+    </div>
+    `;
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
+  renderMessage(message = this._message) {
+    const markup = `
+    <div class="message">
+      <div>
+        <svg>
+          <use xlink:href="#book"></use>
+        </svg>
+      </div>
+      <p>${message}</p>
+    </div>
+    `;
+    this._clear();
+    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  }
 
   _clear() {
     this._parentElement.innerHTML = "";

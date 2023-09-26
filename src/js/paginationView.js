@@ -11,6 +11,7 @@ class PaginationView extends View {
     });
   }
   _generateMarkup() {
+    if (this._data.results.length === 0) return;
     const curPage = this._data.page;
     const totPages = Math.ceil(
       this._data.results.length / this._data.resultsPerPage

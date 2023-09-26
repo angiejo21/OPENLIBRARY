@@ -14,18 +14,16 @@ class SearchView {
   }
 
   addHandlerSearch(handler) {
-    this._parentElement.addEventListener("submit", (e) => {
-      e.preventDefault();
-      handler();
-    });
-  }
-  addHandlerBookmarks(handler) {
     this._parentElement.addEventListener("click", (e) => {
+      e.preventDefault();
       const btn = e.target.closest(".btn");
       if (!btn) return;
+      if (btn.classList.contains("btn--search")) {
+        handler("search");
+      }
       if (btn.classList.contains("btn--all-bookmarks")) {
-        handler();
-      } else return;
+        handler("bookmarks");
+      }
     });
   }
 }

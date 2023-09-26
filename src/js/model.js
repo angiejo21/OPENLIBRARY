@@ -72,7 +72,7 @@ export const loadSearchResults = async function (field, query) {
     //3) Imposta la pagina iniziale a 1
     state.search.page = 1;
   } catch (err) {
-    console.error(err, "loading failed");
+    throw new Error("Network error, please try again!");
   }
 };
 
@@ -126,9 +126,12 @@ export const addBookmark = function (book) {
   saveBookmark();
 };
 export const deleteBookmark = function (book) {
+  console.log(book);
   const index = state.bookmarks.findIndex((b) => b.id === book.id);
-  state.bookmarks.splice(index, 1);
+  console.log(index);
   book.bookmarked = false;
+  state.bookmarks.splice(index, 1);
+  console.log(state.bookmarks);
   saveBookmark();
 };
 export const showBookmarks = function () {

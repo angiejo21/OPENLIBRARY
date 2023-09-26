@@ -7,9 +7,7 @@
   </head>
   <body>
     <div class="container">
-      <div class="overlay">
-        <div class="overlay__content"></div>
-      </div>
+
       <header class="header">
         <h1 class="header__title">What should I read next?</h1>
         <h2 class="header__subtitle">
@@ -33,28 +31,41 @@
                 <use xlink:href="#chevron-down"></use>
               </svg>
             </div>
-            <input
-              type="text"
-              name="query"
-              id="query"
-              placeholder="What's on your mind?"
-              class="search--query search__query"
-            />
-            <button class="btn btn--search" title="Search">
-              <svg>
-                <use xlink:href="#search"></use>
-              </svg>
-            </button>
+            <div class="input">
+              <input
+                type="text"
+                name="query"
+                id="query"
+                placeholder="What's on your mind?"
+                class="search--query search__query"
+              />
+              <button class="btn btn--search" title="Search" type="submit">
+                <svg>
+                  <use xlink:href="#search"></use>
+                </svg>
+              </button>
+            </div>
             <button class="btn btn--all-bookmarks" title="See all bookmarks">
               <svg>
-                <use xlink:href="#bookmark"></use>
+                <use xlink:href="#book"></use>
               </svg>
             </button>
           </form>
         </div>
         <div class="search-results">
           <ul class="results">
-            <li class="preview preview--active">
+            <div class="message">
+              <div>
+                <svg><use xlink:href="#globe"></use>
+                Search by genre, author or title
+              </div>
+              <p>You can peruse thousands of titles.<br>Search by genre, author or title</p>
+              <div>
+                <svg><use xlink:href="#pen-tool"></use>
+              </div>
+            </div>
+
+            <!-- <li class="preview preview--active">
               <button class="btn btn--bookmark" title="Bookmark it">
                 <svg>
                   <use xlink:href="#bookmark"></use>
@@ -86,34 +97,10 @@
                   <img src="../src/img/cover-example.jpg" alt="example cover" />
                 </figure>
               </div>
-            </li>
-            <li class="preview">
-              <div class="btn preview__btn">
-                <svg>
-                  <use xlink:href="#x"></use>
-                </svg>
-              </div>
-              <div class="preview__main">
-                <h3 class="preview__title">The Lord of the rings</h3>
-                <h4 class="preview__subtitle">J.R.R. Tolkien</h4>
-              </div>
-              <div class="preview__content">
-                <div class="preview__description">
-                  <p class="preview__text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Odit vitae blanditiis quos voluptatem, commodi eius!
-                  </p>
-                  <a href="#" class="preview__link">Read more &#707;</a>
-                </div>
-              </div>
-              <figure class="preview__fig">
-                <img src="../src/img/cover-example.jpg" alt="example cover" />
-              </figure>
-            </li>
-          </ul>
-        </div>
+            </li> -->
+            </ul>
         <div class="pagination">
-          <button class="btn btn--previous">
+          <!-- <button class="btn btn--previous">
             <svg>
               <use xlink:href="#chevron-left"></use>
             </svg>
@@ -123,7 +110,7 @@
             <svg>
               <use xlink:href="#chevron-right"></use>
             </svg>
-          </button>
+          </button> -->
         </div>
       </main>
     </div>
