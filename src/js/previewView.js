@@ -6,7 +6,9 @@ class PreviewView extends View {
   _generateMarkup() {
     return `
     <li class="preview" data-id="${this._data.id}">
-      <div class="btn btn--bookmark" title="Bookmark it">
+      <div class="btn btn--bookmark ${
+        this._data.bookmarked ? "bookmark-active" : ""
+      }" title="Bookmark it">
         <svg>
           <use xlink:href="#bookmark"></use>
         </svg>
