@@ -4,11 +4,12 @@ class PreviewView extends View {
   _parentElement = document.querySelector(".results");
 
   _generateMarkup() {
+    const length = window.innerWidth < 400 ? 25 : 35;
     return `
-    <li class="preview" data-id="${this._data.id}">
-      <div class="btn btn--bookmark ${
-        this._data.bookmarked ? "bookmark-active" : ""
-      }" title="Bookmark it">
+    <li class="preview ${
+      this._data.bookmarked ? "bookmark--active" : ""
+    }" data-id="${this._data.id}">
+      <div class="btn btn--bookmark" title="Bookmark it">
       <svg>
         <use xlink:href="#${this._data.bookmarked ? "book" : "bookmark"}"></use>
       </svg>
@@ -20,8 +21,8 @@ class PreviewView extends View {
       </div>
       <div class="preview__main">
         <h3 class="preview__title">${
-          this._data.title.length > 40
-            ? this._data.title.slice(0, 40) + "..."
+          this._data.title.length > length
+            ? this._data.title.slice(0, length) + "..."
             : this._data.title
         }</h3>
         <h4 class="preview__subtitle">${this._data.author}</h4>
@@ -38,9 +39,7 @@ class PreviewView extends View {
           >
         </div>
         <figure class="preview__fig">
-          <img src="${this._data.cover ? this._data.cover : "#"}" alt="${
-      this._data.title
-    } cover" />
+          <img src="${this._data.cover}" alt="${this._data.title} cover" />
         </figure>
       </div>
     </li>

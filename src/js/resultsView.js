@@ -4,7 +4,7 @@ import previewView from "./previewView.js";
 class ResultsView extends View {
   _parentElement = document.querySelector(".results");
   _errorMessage =
-    "We couldn't find any book corresponding to your query.<br> Please try again :)";
+    "We couldn't find any book corresponding to your query.<br> Please check the search parameters or try again :)";
   _message =
     "You haven't bookmarked any book yet, as soon as you do, you'll find them all here :)";
 
@@ -27,7 +27,9 @@ class ResultsView extends View {
     }`;
     link.href = book.url;
     cover.src = book.cover;
-    element.classList.toggle("preview--active");
+    cover.addEventListener("load", () =>
+      element.classList.toggle("preview--active")
+    );
   }
 
   addHandlerBook(handler) {
@@ -48,11 +50,11 @@ class ResultsView extends View {
 
       if (btn.classList.contains("btn--bookmark")) {
         handler("bookmark");
-        btn.classList.toggle("bookmark-active");
+        bookEl.classList.toggle("bookmark--active");
         btn.innerHTML = `
         <svg>
           <use xlink:href="#${
-            btn.classList.contains("bookmark-active") ? "book" : "bookmark"
+            bookEl.classList.contains("bookmark--active") ? "book" : "bookmark"
           }"></use>
         </svg>
         `;

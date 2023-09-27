@@ -24,8 +24,16 @@ BOTTONS
   right: 0;
 }
 .btn--all-bookmarks {
-  width: 100%;
-  border-radius: 100px;
+  grid-column: 1 /2;
+  grid-row: 1 / 2;
+  background-color: darken($color-accent, 10%);
+  &:hover,
+  &:active {
+    background-color: darken($color-accent, 25%);
+    svg {
+      color: $color-light-2;
+    }
+  }
 }
 /*---------------------------
 MESSAGES

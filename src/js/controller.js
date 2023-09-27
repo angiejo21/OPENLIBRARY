@@ -11,7 +11,6 @@ import "../img/chevron-down.svg";
 import "../img/chevron-left.svg";
 import "../img/chevron-right.svg";
 import "../img/compass.svg";
-import "../img/ghost.svg";
 import "../img/globe.svg";
 import "../img/pen-tool.svg";
 import "../img/search.svg";

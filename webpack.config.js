@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 // const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
 // const BundleAnalyzerPlugin =
 //   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
@@ -66,6 +67,7 @@ module.exports = {
       filename: "index.html",
       template: "src/template.html",
     }),
+    new FaviconsWebpackPlugin("./src/img/logo.png"),
     // new SpriteLoaderPlugin(),
     // new BundleAnalyzerPlugin(),
   ],

@@ -43,7 +43,9 @@ body {
   justify-content: center;
   align-items: start;
 }
-
+::selection {
+  background-color: rgba($color-dark-1, 0.5);
+}
 svg {
   height: 4rem;
   width: 4rem;

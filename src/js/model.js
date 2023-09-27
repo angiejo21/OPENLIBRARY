@@ -100,7 +100,7 @@ export const loadBook = async function (id) {
     //2)salva i dati arrivati nell'oggetto libro
     state.book.cover = state.book.coverId
       ? `${COVER_URL}id/${state.book.coverId}-M.jpg`
-      : `${COVER_URL}olid/${state.book.id}-M.jpg`;
+      : `https://picsum.photos/250/400`;
     state.book.url = `${BASIC_URL}works/${state.book.id}`;
     updateBookDescription(data);
   } catch (err) {

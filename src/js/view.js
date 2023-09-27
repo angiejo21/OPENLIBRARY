@@ -20,6 +20,7 @@ export default class View {
         <use xlink:href="#compass"></use>
       </svg>
     </div>
+    <h3>Finding my way...</h3>
     `;
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
