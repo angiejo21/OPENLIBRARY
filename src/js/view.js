@@ -1,18 +1,24 @@
+import _ from "lodash-es";
+
 /*-----------------------------------
               VIEW     
 -----------------------------------*/
 export default class View {
   _data;
+
+  //Recalls the markup and returns it (render=false) or inserts it in the parent (render=true)
   render(data, render = true) {
-    // if (!data || (Array.isArray(data) && data.length === 0)) {
-    //   return this.renderError();
-    // }
+    if (!data || (_.isArray(data) && _.isEmpty(data))) {
+      return this.renderError();
+    }
     this._data = data;
     const markup = this._generateMarkup();
     if (!render) return markup;
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
+
+  //Renders spinner in the parent
   renderSpinner() {
     const markup = `
     <div class="spinner">
@@ -25,6 +31,7 @@ export default class View {
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
+  //Renders error message in the parent
   renderError(message = this._errorMessage) {
     const markup = `
     <div class="message">
@@ -39,6 +46,7 @@ export default class View {
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
+  //Renders message in the parent
   renderMessage(message = this._message) {
     const markup = `
     <div class="message">
@@ -53,7 +61,7 @@ export default class View {
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
-
+  //Empties parent element
   _clear() {
     this._parentElement.innerHTML = "";
   }

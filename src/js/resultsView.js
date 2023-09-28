@@ -8,14 +8,16 @@ class ResultsView extends View {
   _message =
     "You haven't bookmarked any book yet, as soon as you do, you'll find them all here :)";
 
+  //Concatenates markups for each result in the array
   _generateMarkup() {
     return this._data
       .map((result) => previewView.render(result, false))
       .join("");
   }
 
-  updateMarkup(bookId, book) {
-    const bookAttr = `[data-id='${bookId}']`;
+  //Updates book markup data and toggles active class
+  updateMarkup(book) {
+    const bookAttr = `[data-id='${book.id}']`;
     const element = document.querySelector(bookAttr);
     const text = element.querySelector(".preview__text");
     const link = element.querySelector(".preview__link");
@@ -32,6 +34,7 @@ class ResultsView extends View {
     );
   }
 
+  //Event Handler
   addHandlerBook(handler) {
     this._parentElement.addEventListener("click", (e) => {
       e.preventDefault();

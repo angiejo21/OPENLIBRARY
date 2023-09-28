@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: 8rem max-content;
-  transition: 1s;
+  transition: 1.5s;
 
   &__main {
     background-color: $color-accent;
@@ -19,7 +19,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: start;
-    border-radius: 40px;
+    border-radius: 10rem;
   }
   &__title {
     font-size: 2.2rem;
@@ -50,9 +50,9 @@
     color: $color-dark-1;
     box-shadow: inset 3px 0 0 $color-accent;
     padding: 0 1rem;
-    transition: 0.3s;
+    transition: 0.5s;
     span {
-      transition: 0.3s;
+      transition: 0.5s;
     }
   }
   &__link:hover,
@@ -120,7 +120,7 @@
     transform: translateX(0);
     transition: left 1.5s, color 0.5s;
     &:hover {
-      color: $color-light-2;
+      color: $color-light-1;
     }
   }
 }
@@ -138,8 +138,8 @@
     }
   }
 }
-//ACTIVE STATE
 
+//ACTIVE STATE
 .preview--active {
   background-color: rgba($color-accent, 0.2);
   padding: 2rem;
@@ -162,6 +162,7 @@
   }
 }
 
+//MEDIA
 @media screen and (min-width: 37.5em) {
   .preview {
     .preview__main {

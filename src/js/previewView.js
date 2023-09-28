@@ -3,6 +3,7 @@ import View from "./view";
 class PreviewView extends View {
   _parentElement = document.querySelector(".results");
 
+  //Creates markup for a single result
   _generateMarkup() {
     const length = window.innerWidth < 400 ? 25 : 35;
     return `

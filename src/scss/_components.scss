@@ -12,7 +12,7 @@ BOTTONS
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.5s;
 }
 .btn:hover {
   color: $color-light-1;
@@ -27,13 +27,28 @@ BOTTONS
   grid-column: 1 /2;
   grid-row: 1 / 2;
   background-color: darken($color-accent, 10%);
+  transition: 0.5s;
   &:hover,
   &:active {
     background-color: darken($color-accent, 25%);
     svg {
-      color: $color-light-2;
+      color: $color-light-1;
     }
   }
+}
+.btn--previous {
+  svg {
+    transform: translateX(-5%);
+  }
+}
+.btn--next {
+  svg {
+    transform: translateX(5%);
+  }
+}
+.disabled {
+  opacity: 0.2;
+  pointer-events: none;
 }
 /*---------------------------
 MESSAGES
@@ -41,21 +56,20 @@ MESSAGES
 .message {
   display: flex;
   align-items: center;
-  padding: 3rem 0;
+  padding: 3rem;
   border-radius: 5px;
   background-color: rgba($color-accent, 0.2);
   color: $color-dark-2;
-  font-size: 2.2rem;
+  font-size: 2rem;
   text-align: center;
 
   div {
     display: flex;
     align-items: center;
     color: $color-dark-1;
-    margin: 0 3rem;
   }
   p {
-    margin-right: 3rem;
+    margin: 0 3rem;
   }
 }
 /*---------------------------

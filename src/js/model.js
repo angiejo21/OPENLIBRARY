@@ -1,16 +1,11 @@
 import axios from "axios";
 import _ from "lodash-es";
-import { createQuery } from "./helpers.js";
-import {
-  BASIC_URL,
-  COVER_URL,
-  GOOGLE_SEARCH_URL,
-  RES_PER_PAGE,
-} from "./config.js";
+import { BASIC_URL, COVER_URL, RES_PER_PAGE } from "./config.js";
 
 /*-----------------------------------
               MODEL     
 -----------------------------------*/
+//STATE
 
 export const state = {
   book: {},
@@ -23,91 +18,99 @@ export const state = {
   bookmarks: [],
 };
 
-export const loadSearchResults = async function (field, query) {
-  try {
-    //0) salva la query e prepara l'URL
-    state.search.query = query;
-    const apiUrl =
-      field === "subjects"
-        ? `subjects/${query}.json`
-        : `search.json?${field}=${query}`;
-    //1) aspetta la risposta della chiamata all'API
-    const data = await axios.get(`${BASIC_URL}${apiUrl}`);
-    let results;
-    //2) Salva i dati arrivati tra i risultati creando l'oggetto libro che serve
-    if (data.data.works) {
-      results = data.data.works.map((w) => {
+//FUNCTIONS
+//Creates the book objs for the results array (from the API response)
+const createBookResults = function (data) {
+  let results;
+  if (data.data.works) {
+    results = data.data.works.map((w) => {
+      return {
+        id: w.key.slice(w.key.indexOf("OL")),
+        title: w.title,
+        author: w.authors[0].name,
+        coverId: w.cover_id,
+      };
+    });
+  } else if (data.data.docs) {
+    results = data.data.docs.map((d) => {
+      if (d.author_name) {
         return {
-          id: w.key.slice(w.key.indexOf("OL")),
-          title: w.title,
-          author: w.authors[0].name,
-          coverId: w.cover_id,
+          id: d.key.slice(d.key.indexOf("OL")),
+          title: d.title,
+          author: d.author_name[0],
+          coverId: d.cover_i,
         };
-      });
-    } else if (data.data.docs) {
-      results = data.data.docs.map((d) => {
-        if (d.author_name) {
-          return {
-            id: d.key.slice(d.key.indexOf("OL")),
-            title: d.title,
-            author: d.author_name[0],
-            coverId: d.cover_i,
-          };
-        } else {
-          return;
-        }
-      });
-    }
-    state.search.results = results
-      .filter((r) => r)
-      .map((r) => {
-        if (state.bookmarks.some((bm) => bm.id === r.id)) {
-          r.bookmarked = true;
-          return r;
-        } else {
-          r.bookmarked = false;
-          return r;
-        }
-      });
-    //3) Imposta la pagina iniziale a 1
-    state.search.page = 1;
-  } catch (err) {
-    throw new Error("Network error, please try again!");
+      } else {
+        return;
+      }
+    });
+  } else {
+    return;
   }
+  state.search.results = _.compact(results).map((r) => {
+    _.find(state.bookmarks, { id: r.id })
+      ? (r.bookmarked = true)
+      : (r.bookmarked = false);
+    return r;
+  });
 };
 
+//Adds the description to the current book (from the API response)
 const updateBookDescription = function (data) {
   if (!data.data.description) {
-    state.book.description = `We're sorry, the description was not provided by Open Library.</br>If your're still curious, you can look for it on their website here at the bottom, or <a href="${GOOGLE_SEARCH_URL}${createQuery(
-      state.book.title,
-      state.book.author,
-      "summary"
-    )}" class="preview__link">google</a>it.`;
-  } else if (typeof data.data.description === "object") {
+    state.book.description = `We're sorry, the description was not provided by Open Library. Although, if your're curious, you can check the book's page on their website:`;
+  } else if (_.isObject(data.data.description)) {
     state.book.description = data.data.description.value;
   } else {
     state.book.description = data.data.description;
   }
 };
 
-export const loadBook = async function (id) {
-  try {
-    //0)Recupera il libro dalla ricerca
-    state.book = state.search.results.filter((b) => b.id === id)[0];
+//Saves the bookmarks in LocalStorage
+const saveBookmark = function () {
+  localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
+};
 
-    //1)aspetta la risposta alla chiamata all'API
-    const data = await axios.get(`${BASIC_URL}works/${id}.json`);
-    //2)salva i dati arrivati nell'oggetto libro
+//EXPORTS
+//Requests data to the API and fills the 'state' obj
+export const loadSearchResults = async function (field, query) {
+  try {
+    //Creates url for API call
+    const apiUrl =
+      field === "subjects"
+        ? `subjects/${query}.json`
+        : `search.json?${field}=${query}`;
+    //Loads response data
+    const data = await axios.get(`${BASIC_URL}${apiUrl}`);
+    //Saves data in the 'state' obj
+    state.search.query = query.replaceAll("+", " ");
+    createBookResults(data);
+    //Resets page
+    state.search.page = 1;
+  } catch (err) {
+    throw new Error("Network error, please try again!");
+  }
+};
+
+//Requests data to the API and completes the 'current book' obj
+export const loadBook = async function (bookId) {
+  try {
+    //Finds the selected id and saves it as 'current book'
+    state.book = _.find(state.search.results, { id: bookId });
+    //Loads response data
+    const data = await axios.get(`${BASIC_URL}works/${bookId}.json`);
+    //Completes the 'current book' obj with cover, url & description
     state.book.cover = state.book.coverId
       ? `${COVER_URL}id/${state.book.coverId}-M.jpg`
       : `https://picsum.photos/250/400`;
     state.book.url = `${BASIC_URL}works/${state.book.id}`;
     updateBookDescription(data);
   } catch (err) {
-    console.error(err, "book failed");
+    throw new Error("Book loading failed, please try again!");
   }
 };
 
+//Returns the search results for the selected page
 export const getPageResults = function (moveTo = state.search.page) {
   if (moveTo === "previous") state.search.page--;
   if (moveTo === "next") state.search.page++;
@@ -117,27 +120,24 @@ export const getPageResults = function (moveTo = state.search.page) {
   return state.search.results.slice(start, end);
 };
 
-const saveBookmark = function () {
-  localStorage.setItem("bookmarks", JSON.stringify(state.bookmarks));
-};
+//Bookmarks
+//Adds bookmark from book
 export const addBookmark = function (book) {
   book.bookmarked = true;
   state.bookmarks.push(book);
   saveBookmark();
 };
+//Deletes bookmark from book
 export const deleteBookmark = function (book) {
-  console.log(book);
-  const index = state.bookmarks.findIndex((b) => b.id === book.id);
-  console.log(index);
+  _.pull(state.bookmarks, _.find(state.bookmarks, { id: book.id }));
   book.bookmarked = false;
-  state.bookmarks.splice(index, 1);
-  console.log(state.bookmarks);
   saveBookmark();
 };
+//Copies the saved bookmarks as search results (for rendering)
 export const showBookmarks = function () {
   state.search.results = _.cloneDeep(state.bookmarks);
-  console.log(state.search.results);
 };
+//Recollects saved bookmarks from LocalStorage
 export const initStorage = function () {
   const storage = localStorage.getItem("bookmarks");
   if (storage) state.bookmarks = JSON.parse(storage);

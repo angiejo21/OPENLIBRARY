@@ -63,7 +63,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "WSIRN | What should I read next?",
+      title: "NXT | What should I read next?",
       filename: "index.html",
       template: "src/template.html",
     }),

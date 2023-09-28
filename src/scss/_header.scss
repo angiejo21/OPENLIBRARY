@@ -6,9 +6,8 @@
     display: inline-block;
     position: relative;
     margin-bottom: 3rem;
-
     font-family: $font-title;
-    font-size: 7rem;
+    font-size: 9rem;
     word-wrap: break-word;
   }
   &__subtitle {
@@ -21,4 +20,7 @@
   span {
     font-weight: 700;
   }
+}
+.accent {
+  color: darken($color-accent, 10%);
 }

@@ -3,12 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="OpenLibrary aspires to record every book ever published, with NXT you can search their catalogue and find your next story"
+    />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <!-- Open Graph -->
+    <meta property="og:title" content="NXT | What should I read next?" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nxt.bello.codes" />
+    <meta
+      property="og:image"
+      content="https://nxt.bello.codes/images/cover.png"
+    />
   </head>
   <body>
     <div class="container">
       <header class="header">
-        <h1 class="header__title">What should I read next?</h1>
+        <h1 class="header__title">
+          What should<br />
+          I read <span class="accent">NXT</span>?
+        </h1>
         <h2 class="header__subtitle">
           powered by <span>OpenLibrary APIs</span>
         </h2>
@@ -55,61 +70,15 @@
           <ul class="results">
             <div class="message">
               <div>
-                <svg><use xlink:href="#globe"></use>
-                Search by genre, author or title
+                <svg><use xlink:href="#globe"></use>                
               </div>
-              <p>You can peruse thousands of titles.<br>Search by genre, author or title</p>
+              <p>OpenLibrary aspires to record every book ever published.<br>Search their catalogue by <strong>genre</strong>, <strong>author</strong> or <strong>title</strong></p>
               <div>
                 <svg><use xlink:href="#pen-tool"></use>
               </div>
             </div>
-
-            <!-- <li class="preview preview--active">
-              <button class="btn btn--bookmark" title="Bookmark it">
-                <svg>
-                  <use xlink:href="#bookmark"></use>
-                </svg>
-              </button>
-              <button
-                class="btn btn--toggle preview__btn"
-                title="Toggle book dscription"
-              >
-                <svg>
-                  <use xlink:href="#x"></use>
-                </svg>
-              </button>
-              <div class="preview__main">
-                <h3 class="preview__title">The Lord of the rings</h3>
-                <h4 class="preview__subtitle">J.R.R. Tolkien</h4>
-              </div>
-              <div class="preview__content">
-                <div class="preview__description">
-                  <p class="preview__text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Odit vitae blanditiis quos voluptatem, commodi eius!
-                  </p>
-                  <a href="#" class="preview__link"
-                    >Read more <span>&#707;</span></a
-                  >
-                </div>
-                <figure class="preview__fig">
-                  <img src="../src/img/cover-example.jpg" alt="example cover" />
-                </figure>
-              </div>
-            </li> -->
-            </ul>
+          </ul>
         <div class="pagination">
-          <!-- <button class="btn btn--previous">
-            <svg>
-              <use xlink:href="#chevron-left"></use>
-            </svg>
-          </button>
-          <div class="pagination__page">1/6</div>
-          <button class="btn btn--next">
-            <svg>
-              <use xlink:href="#chevron-right"></use>
-            </svg>
-          </button> -->
         </div>
       </main>
     </div>
