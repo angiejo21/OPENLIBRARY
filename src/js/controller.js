@@ -94,9 +94,6 @@ const controlPagination = function (moveTo) {
 -----------------------------------*/
 
 const init = function () {
-  document
-    .querySelector('meta[property="og:image"]')
-    .setAttribute("content", cover);
   model.initStorage();
   searchView.addHandlerSearch(controlLoading);
   resultsView.addHandlerBook(controlBookSelection);

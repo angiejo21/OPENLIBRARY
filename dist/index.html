@@ -3,58 +3,83 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>WSIRN | What should I read next?</title>
-  <script defer src="bundlee84c30290d3d9e15d668.js"></script></head>
+    <meta
+      name="description"
+      content="OpenLibrary aspires to record every book ever published, with NXT you can search their catalogue and find your next story"
+    />
+    <title>NXT | What should I read next?</title>
+    <!-- Open Graph -->
+    <meta property="og:title" content="NXT | What should I read next?" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nxt.bello.codes" />
+    <meta
+      property="og:image"
+      content="https://nxt.bello.codes/cover.png"
+    />
+  <link rel="icon" href="assets/favicon.png"><script defer src="bundlebf394449db9987f00a67.js"></script></head>
   <body>
     <div class="container">
       <header class="header">
-        <h1 class="header__title">What should I read next?</h1>
+        <h1 class="header__title">
+          What should<br />
+          I read <span class="accent">NXT</span>?
+        </h1>
         <h2 class="header__subtitle">
-          powered by <span>OpenLibrary API</span>
+          powered by <span>OpenLibrary APIs</span>
         </h2>
       </header>
       <main>
-        <div>
+        <div class="form">
           <form class="search">
-            <select name="" id="">
-              <option value="genre">Genre</option>
-              <option value="author">Author</option>
-              <option value="title">Title</option>
-            </select>
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder="What's on your mind?"
-            />
-            <button class="btn search__btn">Search</button>
-            <button class="btn search__btn">Filter</button>
+            <div class="select search__select">
+              <select
+                name="field"
+                id="field"
+                class="search--field search__field"
+              >
+                <option value="subjects">Genre</option>
+                <option value="author">Author</option>
+                <option value="title">Title</option>
+              </select>
+              <svg>
+                <use xlink:href="#chevron-down"></use>
+              </svg>
+            </div>
+            <div class="input">
+              <input
+                type="text"
+                name="query"
+                id="query"
+                placeholder="What's on your mind?"
+                class="search--query search__query"
+              />
+              <button class="btn btn--search" title="Search" type="submit">
+                <svg>
+                  <use xlink:href="#search"></use>
+                </svg>
+              </button>
+            </div>
+            <button class="btn btn--all-bookmarks" title="See all bookmarks">
+              <svg>
+                <use xlink:href="#book"></use>
+              </svg>
+            </button>
           </form>
         </div>
         <div class="search-results">
           <ul class="results">
-            <li class="preview">
-              <div class="btn preview__btn"></div>
-              <div class="preview__main">
-                <h3 class="preview__title">The Lord of the rings</h3>
-                <h4 class="preview__subtitle">J.R.R. Tolkien</h4>
+            <div class="message">
+              <div>
+                <svg><use xlink:href="#globe"></use>                
               </div>
-              <div class="preview__content">
-                <div class="preview__description">
-                  <p class="preview__text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Odit vitae blanditiis quos voluptatem, commodi eius!
-                  </p>
-                  <a href="#" class="preview__link">Read more &#707;</a>
-                </div>
-                <figure class="preview__fig">
-                  <img src="../src/img/cover-example.jpg" alt="example cover" />
-                </figure>
+              <p>OpenLibrary aspires to record every book ever published.<br>Search their catalogue by <strong>genre</strong>, <strong>author</strong> or <strong>title</strong></p>
+              <div>
+                <svg><use xlink:href="#pen-tool"></use>
               </div>
-            </li>
+            </div>
           </ul>
+        <div class="pagination">
         </div>
-        <div class="pagination"></div>
       </main>
     </div>
   </body>

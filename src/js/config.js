@@ -4,5 +4,7 @@ export const COVER_URL = "https://covers.openlibrary.org/b/";
 export const GOOGLE_SEARCH_URL = "https://www.google.com/search?q=";
 
 export const createQuery = function (...strings) {
-  return strings.map((s) => s.trim().replaceAll(" ", "+")).join("+");
+  return strings
+    .map((s) => s.toLowerCase().trim().replaceAll(" ", "+"))
+    .join("+");
 };

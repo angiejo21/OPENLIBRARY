@@ -1,5 +1,5 @@
 .header {
-  padding: 20rem 0 7rem 0;
+  padding: 5rem 0 7rem 0;
   text-align: center;
 
   &__title {
@@ -23,4 +23,15 @@
 }
 .accent {
   color: darken($color-accent, 10%);
+}
+@media screen and (min-width: 37.5em) {
+  .header {
+    padding: 10rem 0 7rem 0;
+  }
+  .header__title {
+    font-size: 5rem;
+  }
+  .header__subtitle {
+    font-size: 1.8rem;
+  }
 }

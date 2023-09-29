@@ -1,9 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
-// const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
-// const BundleAnalyzerPlugin =
-//   require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 
 module.exports = {
   mode: "development",
@@ -49,13 +46,9 @@ module.exports = {
       },
       {
         test: /\.svg$/i,
-        // include: /.*_sprite\.svg/,
         use: [
           {
             loader: "svg-sprite-loader",
-            // options: {
-            //   publicPath: "",
-            // },
           },
         ],
       },
@@ -68,7 +61,5 @@ module.exports = {
       template: "src/template.html",
     }),
     new FaviconsWebpackPlugin("./src/img/logo.png"),
-    // new SpriteLoaderPlugin(),
-    // new BundleAnalyzerPlugin(),
   ],
 };

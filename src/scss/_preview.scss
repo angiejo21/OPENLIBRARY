@@ -165,21 +165,48 @@
 //MEDIA
 @media screen and (min-width: 37.5em) {
   .preview {
-    .preview__main {
-      padding: 0 10rem;
+    width: 80%;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+    grid-template-rows: 5rem max-content;
+    &__main {
+      padding: 0 6rem;
+      line-height: 1;
+    }
+    &__title {
+      font-size: 1.8rem;
+    }
+    &__subtitle {
+      font-size: 1.5rem;
+    }
+    &__description {
+      margin: 1rem;
+      font-size: 1.5rem;
+    }
+    &__text {
+      margin-bottom: 1rem;
+    }
+    &__fig {
+      max-height: 42rem;
     }
   }
+
   .preview--active {
+    gap: 0.5rem;
+    padding: 1rem;
     .preview__description {
       grid-column: 1 / 4;
     }
     .preview__fig {
       display: block;
     }
+    .btn--toggle {
+      left: 475%;
+    }
   }
   .preview.bookmark--active {
     .btn--bookmark {
-      left: 400%;
+      left: 425%;
     }
   }
 }
