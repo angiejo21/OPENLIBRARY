@@ -52,7 +52,7 @@ class ResultsView extends View {
       }
 
       if (btn.classList.contains("btn--bookmark")) {
-        handler("bookmark");
+        handler("bookmark", bookEl.dataset.id);
         bookEl.classList.toggle("bookmark--active");
         btn.innerHTML = `
         <svg>

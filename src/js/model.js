@@ -98,13 +98,15 @@ export const loadBook = async function (bookId) {
     //Finds the selected id and saves it as 'current book'
     state.book = _.find(state.search.results, { id: bookId });
     //Loads response data
-    const data = await axios.get(`${BASIC_URL}works/${bookId}.json`);
-    //Completes the 'current book' obj with cover, url & description
-    state.book.cover = state.book.coverId
-      ? `${COVER_URL}id/${state.book.coverId}-M.jpg`
-      : `https://picsum.photos/250/400`;
-    state.book.url = `${BASIC_URL}works/${state.book.id}`;
-    updateBookDescription(data);
+    if (!state.book.description) {
+      const data = await axios.get(`${BASIC_URL}works/${bookId}.json`);
+      //Completes the 'current book' obj with cover, url & description
+      state.book.cover = state.book.coverId
+        ? `${COVER_URL}id/${state.book.coverId}-M.jpg`
+        : `https://picsum.photos/250/400`;
+      state.book.url = `${BASIC_URL}works/${state.book.id}`;
+      updateBookDescription(data);
+    }
   } catch (err) {
     throw new Error("Book loading failed, please try again!");
   }

@@ -72,6 +72,7 @@ const controlBookSelection = async function (target, value) {
     }
     //If bookmark adds/removes from array
     if (target === "bookmark") {
+      await model.loadBook(value);
       if (model.state.book.bookmarked) model.deleteBookmark(model.state.book);
       else model.addBookmark(model.state.book);
     }

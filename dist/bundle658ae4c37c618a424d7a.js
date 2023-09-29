@@ -179,25 +179,30 @@ var loadBook = /*#__PURE__*/function () {
             id: bookId
           });
           //Loads response data
-          _context2.next = 4;
+          if (state.book.description) {
+            _context2.next = 9;
+            break;
+          }
+          _context2.next = 5;
           return axios__WEBPACK_IMPORTED_MODULE_2__["default"].get("".concat(_config_js__WEBPACK_IMPORTED_MODULE_0__.BASIC_URL, "works/").concat(bookId, ".json"));
-        case 4:
+        case 5:
           data = _context2.sent;
           //Completes the 'current book' obj with cover, url & description
           state.book.cover = state.book.coverId ? "".concat(_config_js__WEBPACK_IMPORTED_MODULE_0__.COVER_URL, "id/").concat(state.book.coverId, "-M.jpg") : "https://picsum.photos/250/400";
           state.book.url = "".concat(_config_js__WEBPACK_IMPORTED_MODULE_0__.BASIC_URL, "works/").concat(state.book.id);
           updateBookDescription(data);
-          _context2.next = 13;
+        case 9:
+          _context2.next = 14;
           break;
-        case 10:
-          _context2.prev = 10;
+        case 11:
+          _context2.prev = 11;
           _context2.t0 = _context2["catch"](0);
           throw new Error("Book loading failed, please try again!");
-        case 13:
+        case 14:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 10]]);
+    }, _callee2, null, [[0, 11]]);
   }));
   return function loadBook(_x3) {
     return _ref2.apply(this, arguments);
@@ -453,7 +458,7 @@ var ResultsView = /*#__PURE__*/function (_View) {
           } else bookEl.classList.toggle("preview--active");
         }
         if (btn.classList.contains("btn--bookmark")) {
-          handler("bookmark");
+          handler("bookmark", bookEl.dataset.id);
           bookEl.classList.toggle("bookmark--active");
           btn.innerHTML = "\n        <svg>\n          <use xlink:href=\"#".concat(bookEl.classList.contains("bookmark--active") ? "book" : "bookmark", "\"></use>\n        </svg>\n        ");
         }
@@ -39320,22 +39325,27 @@ var controlBookSelection = /*#__PURE__*/function () {
         case 5:
           _resultsView_js__WEBPACK_IMPORTED_MODULE_2__["default"].updateMarkup(_model_js__WEBPACK_IMPORTED_MODULE_0__.state.book);
         case 6:
-          //If bookmark adds/removes from array
-          if (target === "bookmark") {
-            if (_model_js__WEBPACK_IMPORTED_MODULE_0__.state.book.bookmarked) _model_js__WEBPACK_IMPORTED_MODULE_0__.deleteBookmark(_model_js__WEBPACK_IMPORTED_MODULE_0__.state.book);else _model_js__WEBPACK_IMPORTED_MODULE_0__.addBookmark(_model_js__WEBPACK_IMPORTED_MODULE_0__.state.book);
+          if (!(target === "bookmark")) {
+            _context2.next = 10;
+            break;
           }
-          _context2.next = 13;
-          break;
+          _context2.next = 9;
+          return _model_js__WEBPACK_IMPORTED_MODULE_0__.loadBook(value);
         case 9:
-          _context2.prev = 9;
+          if (_model_js__WEBPACK_IMPORTED_MODULE_0__.state.book.bookmarked) _model_js__WEBPACK_IMPORTED_MODULE_0__.deleteBookmark(_model_js__WEBPACK_IMPORTED_MODULE_0__.state.book);else _model_js__WEBPACK_IMPORTED_MODULE_0__.addBookmark(_model_js__WEBPACK_IMPORTED_MODULE_0__.state.book);
+        case 10:
+          _context2.next = 16;
+          break;
+        case 12:
+          _context2.prev = 12;
           _context2.t0 = _context2["catch"](0);
           _resultsView_js__WEBPACK_IMPORTED_MODULE_2__["default"].renderError();
           console.error("\uD83D\uDCA5: ".concat(_context2.t0));
-        case 13:
+        case 16:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[0, 9]]);
+    }, _callee2, null, [[0, 12]]);
   }));
   return function controlBookSelection(_x2, _x3) {
     return _ref2.apply(this, arguments);
@@ -39365,4 +39375,4 @@ init();
 
 /******/ })()
 ;
-//# sourceMappingURL=bundlebf394449db9987f00a67.js.map
+//# sourceMappingURL=bundle658ae4c37c618a424d7a.js.map
