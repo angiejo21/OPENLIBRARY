@@ -8,6 +8,19 @@ class ResultsView extends View {
   _message =
     "You haven't bookmarked any book yet, as soon as you do, you'll find them all here :)";
 
+  init() {
+    this._parentElement.innerHTML = `
+    <div class="message">
+      <div>
+        <svg><use xlink:href="#globe"></use>                
+      </div>
+      <p>OpenLibrary aspires to record every book ever published.<br>Search their catalogue by <strong>genre</strong>, <strong>author</strong> or <strong>title</strong></p>
+      <div>
+        <svg><use xlink:href="#pen-tool"></use>
+      </div>
+    </div>
+    `;
+  }
   //Concatenates markups for each result in the array
   _generateMarkup() {
     return this._data

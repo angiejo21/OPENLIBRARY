@@ -2,6 +2,7 @@ import * as model from "./model.js";
 import searchView from "./searchView.js";
 import resultsView from "./resultsView.js";
 import paginationView from "./paginationView.js";
+import pageView from "./pageView.js";
 import "../scss/main.scss";
 import _ from "lodash-es";
 import cover from "../img/cover.png";
@@ -96,6 +97,9 @@ const controlPagination = function (moveTo) {
 
 const init = function () {
   model.initStorage();
+  pageView.init();
+  searchView.init();
+  resultsView.init();
   searchView.addHandlerSearch(controlLoading);
   resultsView.addHandlerBook(controlBookSelection);
   paginationView.addHandlerPagination(controlPagination);
