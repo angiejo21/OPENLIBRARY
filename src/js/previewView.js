@@ -15,7 +15,7 @@ class PreviewView extends View {
         <use xlink:href="#${this._data.bookmarked ? "book" : "bookmark"}"></use>
       </svg>
       </div>
-      <div class="btn btn--toggle preview__btn" title="toggle book">
+      <div class="btn btn--toggle" title="toggle book">
         <svg>
           <use xlink:href="#x"></use>
         </svg>

@@ -29,9 +29,11 @@ class ResultsView extends View {
     }`;
     link.href = book.url;
     cover.src = book.cover;
-    cover.addEventListener("load", () =>
-      element.classList.toggle("preview--active")
-    );
+    cover.addEventListener("load", () => {
+      cover.style.opacity = 1;
+    });
+    element.classList.toggle("preview--active");
+    element.querySelector(".btn--toggle").classList.remove("loader");
   }
 
   //Event Handler
@@ -40,6 +42,7 @@ class ResultsView extends View {
       e.preventDefault();
       const bookEl = e.target.closest(".preview");
       const btn = e.target.closest(".btn");
+      console.log(bookEl, btn);
 
       if (e.target.classList.contains("preview__link")) {
         handler("link", e.target.href);
@@ -47,6 +50,7 @@ class ResultsView extends View {
 
       if (btn.classList.contains("btn--toggle")) {
         if (!bookEl.classList.contains("preview--active")) {
+          btn.classList.add("loader");
           handler("toggle", bookEl.dataset.id);
         } else bookEl.classList.toggle("preview--active");
       }

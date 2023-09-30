@@ -106,7 +106,7 @@ export const loadBook = async function (bookId) {
         : `https://picsum.photos/250/400`;
       state.book.url = `${BASIC_URL}works/${state.book.id}`;
       updateBookDescription(data);
-    }
+    } else return;
   } catch (err) {
     throw new Error("Book loading failed, please try again!");
   }

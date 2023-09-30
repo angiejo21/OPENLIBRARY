@@ -12,7 +12,7 @@
 <h3 align="center">NXT | What should I read next?</h3>
 
   <p align="center">
-    Browse OpenLibrary catalogue.
+    Browse the OpenLibrary catalogue.
   </p>
 
 [![MIT License][license-shield]][license-url]

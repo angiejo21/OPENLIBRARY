@@ -75,6 +75,10 @@ MESSAGES
 /*---------------------------
 SPINNER
 ---------------------------*/
+.loader {
+  animation: spinner 1.5s linear infinite;
+}
+
 .spinner {
   height: 10rem;
   width: 10rem;
