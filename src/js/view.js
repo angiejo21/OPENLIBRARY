@@ -5,6 +5,10 @@ import _ from "lodash-es";
 -----------------------------------*/
 export default class View {
   _data;
+  //Renders initial html
+  init() {
+    this._parentElement.innerHTML = this._initMarkup;
+  }
 
   //Recalls the markup and returns it (render=false) or inserts it in the parent (render=true)
   render(data, render = true) {

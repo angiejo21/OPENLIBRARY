@@ -7,9 +7,7 @@ class ResultsView extends View {
     "We couldn't find any book corresponding to your query.<br> Please check the search parameters or try again :)";
   _message =
     "You haven't bookmarked any book yet, as soon as you do, you'll find them all here :)";
-
-  init() {
-    this._parentElement.innerHTML = `
+  _initMarkup = `
     <div class="message">
       <div>
         <svg><use xlink:href="#globe"></use>                
@@ -20,7 +18,7 @@ class ResultsView extends View {
       </div>
     </div>
     `;
-  }
+
   //Concatenates markups for each result in the array
   _generateMarkup() {
     return this._data
@@ -55,11 +53,12 @@ class ResultsView extends View {
       e.preventDefault();
       const bookEl = e.target.closest(".preview");
       const btn = e.target.closest(".btn");
-      console.log(bookEl, btn);
 
       if (e.target.classList.contains("preview__link")) {
         handler("link", e.target.href);
       }
+
+      if (!btn) return;
 
       if (btn.classList.contains("btn--toggle")) {
         if (!bookEl.classList.contains("preview--active")) {

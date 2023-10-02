@@ -1,11 +1,10 @@
+import View from "./view";
 import paginationView from "./paginationView.js";
 import { createQuery } from "./config.js";
 
-class SearchView {
+class SearchView extends View {
   _parentElement = document.querySelector(".search");
-
-  init() {
-    this._parentElement.innerHTML = `            
+  _initMarkup = `            
     <div class="select search__select">
       <select
         name="field"
@@ -38,8 +37,8 @@ class SearchView {
       <svg>
         <use xlink:href="#book"></use>
       </svg>
-    </button>`;
-  }
+    </button>
+    `;
 
   //Collects the search parameters and creates the query
   getQuery() {
